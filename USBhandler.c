@@ -67,15 +67,16 @@ void USB_EP0_SETUP() {
               len = HidDescLen;
               break;
             case 0x22:
-              if (UsbSetupBuf->wIndexL == 1) {
-                pDescr = ReportDesc2;
-                len = ReportDescLen2;
+              if (UsbSetupBuf->wIndexL == 0) {
+                pDescr = GamepadDesc;
+                len = GamepadDescLen;
               } else {
-                pDescr = ReportDesc;
-                len = ReportDescLen;
+                pDescr = KeyboardDesc;
+                len = KeyboardDescLen;
               }
               break;
             default:
+              len = 0xff;
               break;
           }
           if (len != 0xff) {
